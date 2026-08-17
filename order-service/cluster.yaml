@@ -1,0 +1,23 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: order-cluster
+  region: us-east-1
+
+# This keeps your deployment style consistent against future updates
+autoModeConfig:
+  enabled: false
+
+managedNodeGroups:
+  - name: order-workers
+    instanceType: t3.micro
+    desiredCapacity: 2
+    minSize: 1
+    maxSize: 3
+    # This automatically assigns the correct IAM policies to your nodes
+    iam:
+      withAddonPolicies:
+        imageBuilder: true
+        albIngress: true
+

@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+spring:
+  # Database Configuration
+  datasource:
+    url: jdbc:mysql://localhost:3306/order_db?useSSL=false&serverTimezone=UTC
+    username: root
+    password: bala12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  
+  # JPA / Hibernate Configuration
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  # Your Existing Kafka Configuration
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: order-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties: 
+        spring.json.trusted.packages: "com.balaji.*"
+
+  application:
+    name: order-service
+
+  main:
+    allow-circular-references: true
+
+  threads:
+    virtual:
+      enabled: true
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://login.microsoftonline.com/63881c03-e4df-45ce-aa4b-e12abff3eb26/v2.0

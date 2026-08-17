@@ -1,0 +1,27 @@
+server:
+  port: 8083 # Unique port to avoid conflicts
+
+spring:
+  application:
+    name: notification-service
+    
+  kafka:
+    bootstrap-servers: localhost:9092 # Adjust if using a cluster DNS string
+    consumer:
+      group-id: notification-group
+      auto-offset-reset: earliest # Processes missing events if service drops offline
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+  mail:
+    host: ${smtp_provider}
+    port: 587
+    username: ${smtp_email_username}
+    password: ${smtp_email_password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+

@@ -1,0 +1,12 @@
+.metadata/
+.DS_Store
+*.env
+*.rtf
+*.log
+**/target/
+**/build/
+**/.settings/
+**/.project
+**/.classpath
+**/bin/
+.gradle/

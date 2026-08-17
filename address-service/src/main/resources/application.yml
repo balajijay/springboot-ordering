@@ -1,0 +1,11 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: address-service
+
+# 🟢 MAP THE GOOGLE ENVIRONMENT PLUG HERE
+google:
+  api:
+    key: ${google_maps_api_key}
